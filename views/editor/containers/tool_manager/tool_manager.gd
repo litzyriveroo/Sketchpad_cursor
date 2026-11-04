@@ -29,7 +29,13 @@ func attach_project(project: Project) -> void:
 
 func _on_tool_list_tab_changed(tab: int) -> void:
 	editor.current_tool = tool_tab.get_tab_control(tab).tool
+	_apply_tool_cursor(editor.current_tool)
 
 func _on_tool_changed(tool: Tool) -> void:
 	var index = editor.toolset.tools.find(tool)
 	tool_tab.current_tab = index
+	_apply_tool_cursor(tool)
+
+
+func _apply_tool_cursor(tool: Tool) -> void:
+	Input.set_custom_mouse_cursor(tool.cursor, Input.CURSOR_ARROW, tool.cursor_hotspot)
